@@ -17,85 +17,90 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="bg-[#F9F4E8] text-gray-900 font-sans">
+    <div className="bg-[#F9F4E8] text-gray-900 font-sans overflow-x-hidden">
       {/* HEADER */}
-      <div className="bg-[#F9F4E8] text-gray-900 font-sans overflow-x-hidden">
-  <header className="fixed top-0 left-0 w-full bg-[#F9F4E8]/90 backdrop-blur-md shadow-md z-50">
-    <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 relative">
-      {/* LOGO */}
-      <div className="flex items-center gap-3 flex-shrink-0">
-        <img
-          src="/logo.jpeg"
-          alt="Lépcsős Rendezvényterem logo"
-          className="h-16 md:h-20 w-auto"
-        />
-        <h1 className="text-2xl md:text-3xl font-semibold text-[#6B3A1E] italic whitespace-nowrap">
-          <a href="#hero">Lépcsős Rendezvényterem</a>
-        </h1>
-      </div>
+      <header className="fixed top-0 left-0 w-full bg-[#F9F4E8]/90 backdrop-blur-md shadow-md z-50">
+        <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 relative">
+          {/* LOGO */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <img
+              src="/logo.jpeg"
+              alt="Lépcsős Rendezvényterem logo"
+              className="h-16 md:h-20 w-auto"
+            />
+            <h1 className="text-2xl md:text-3xl font-semibold text-[#6B3A1E] italic whitespace-nowrap">
+              <a href="#hero">Lépcsős Rendezvényterem</a>
+            </h1>
+          </div>
 
-      {/* DESKTOP MENU */}
-      <div className="hidden md:flex space-x-8 font-medium">
-        <a href="#about" className="hover:text-[#6B3A1E] transition">Rólunk</a>
-        <a href="#gallery" className="hover:text-[#6B3A1E] transition">Galéria</a>
-        <a href="#menu" className="hover:text-[#6B3A1E] transition">Árlista</a>
-        <a href="#contact" className="hover:text-[#6B3A1E] transition">Elérhetőség</a>
-      </div>
-
-      {/* MOBILE MENU ICON */}
-      <button
-        className="md:hidden text-[#6B3A1E] text-3xl"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Mobil menü"
-      >
-        {menuOpen ? <FaTimes /> : <FaBars />}
-      </button>
-
-      {/* MOBILE MENU DROPDOWN */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            className="absolute top-full left-0 w-full bg-[#F9F4E8] shadow-lg border-t border-[#6B3A1E]/20 flex flex-col items-center py-4 md:hidden z-50"
-          >
-            <a
-              href="#about"
-              onClick={() => setMenuOpen(false)}
-              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-            >
+          {/* DESKTOP MENU */}
+          <div className="hidden md:flex space-x-8 font-medium">
+            <a href="#about" className="hover:text-[#6B3A1E] transition">
               Rólunk
             </a>
-            <a
-              href="#gallery"
-              onClick={() => setMenuOpen(false)}
-              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-            >
+            <a href="#gallery" className="hover:text-[#6B3A1E] transition">
               Galéria
             </a>
-            <a
-              href="#menu"
-              onClick={() => setMenuOpen(false)}
-              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-            >
+            <a href="#menu" className="hover:text-[#6B3A1E] transition">
               Árlista
             </a>
-            <a
-              href="#contact"
-              onClick={() => setMenuOpen(false)}
-              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-            >
+            <a href="#contact" className="hover:text-[#6B3A1E] transition">
               Elérhetőség
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-  </header>
-</div>
+          </div>
 
+          {/* MOBILE MENU ICON */}
+          <button
+            className="md:hidden text-[#6B3A1E] text-3xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Mobil menü"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+
+          {/* MOBILE MENU DROPDOWN */}
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.25 }}
+                className="fixed top-0 left-0 w-full h-screen bg-[#F9F4E8] flex flex-col items-center pt-28 z-50 md:hidden"
+              >
+                <a
+                  href="#about"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-4 text-2xl text-[#6B3A1E] hover:opacity-80"
+                >
+                  Rólunk
+                </a>
+                <a
+                  href="#gallery"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-4 text-2xl text-[#6B3A1E] hover:opacity-80"
+                >
+                  Galéria
+                </a>
+                <a
+                  href="#menu"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-4 text-2xl text-[#6B3A1E] hover:opacity-80"
+                >
+                  Árlista
+                </a>
+                <a
+                  href="#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-4 text-2xl text-[#6B3A1E] hover:opacity-80"
+                >
+                  Elérhetőség
+                </a>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </nav>
+      </header>
 
       <main id="hero" className="pt-20 text-center text-gray-700">
         {/* HERO */}
@@ -119,7 +124,8 @@ function App() {
             <p className="text-lg mb-6 max-w-xl mx-auto text-[#F9F4E8]/90">
               A Lépcsős Rendezvényterem ideális helyszín esküvőkhöz, céges
               eseményekhez és családi rendezvényekhez.
-              <br/>Foglalás telefonon vagy emailen keresztül történik!
+              <br />
+              Foglalás telefonon vagy emailen keresztül történik!
             </p>
             <a
               href="#contact"
@@ -144,8 +150,7 @@ function App() {
             A Lépcsős Rendezvényterem egy elegáns, modern kialakítású helyszín,
             amely tökéletes választás kisebb-nagyobb eseményekhez. Legyen szó
             családi ünnepről, születésnapról, céges összejövetelről vagy baráti
-            találkozóról, nálunk minden adott a felejthetetlen élményekhez.{" "}
-            <br />
+            találkozóról, nálunk minden adott a felejthetetlen élményekhez. <br />
             <br />
             A terem klimatizált, modern világítással és igényes belső térrel
             rendelkezik. Rugalmas elrendezésének köszönhetően bármilyen eseményhez
@@ -194,6 +199,7 @@ function App() {
             </div>
           </div>
         </section>
+
         {/* GALLERY */}
         <section id="gallery" className="bg-white py-20">
           <div className="max-w-6xl mx-auto px-6 text-center">
@@ -210,10 +216,10 @@ function App() {
               {[
                 "https://images.unsplash.com/photo-1600607687920-4e2a09cf1590?auto=format&fit=crop&w=600&q=80",
                 "https://images.unsplash.com/photo-1508923567004-3a6b8004f3d3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1524492449090-1a187f89b3f3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1521790364420-4075a7b0f96f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1533777324565-a040eb52f272?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1524492449090-1a187f89b3f3?auto=format&w=600&q=80",
+                "https://images.unsplash.com/photo-1521790364420-4075a7b0f96f?auto=format&w=600&q=80",
+                "https://images.unsplash.com/photo-1533777324565-a040eb52f272?auto=format&w=600&q=80",
+                "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&w=600&q=80",
               ].map((src, i) => (
                 <motion.div
                   key={i}
@@ -230,7 +236,7 @@ function App() {
             </div>
           </div>
         </section>
-        
+
         {/* PRICE LIST */}
         <section id="menu" className="bg-[#F9F4E8] py-20">
           <div className="max-w-6xl mx-auto px-6 text-center">
@@ -263,7 +269,8 @@ function App() {
             </div>
           </div>
         </section>
-        {/* SOCIAL MEDIA - Kövess minket */}
+
+        {/* SOCIAL MEDIA */}
         <section className="bg-[#6B3A1E] py-16 text-center text-[#F9F4E8]">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -274,9 +281,8 @@ function App() {
             Kövess minket!
           </motion.h2>
           <p className="max-w-2xl mx-auto text-lg mb-8 leading-relaxed">
-            Csatlakozz közösségünkhöz a közösségi oldalakon, és értesülj elsőként az újdonságokról, 
-            eseményekről és exkluzív ajánlatainkról.  
-            Légy részese a Lépcsős Rendezvényterem élménynek online is!
+            Csatlakozz közösségünkhöz a közösségi oldalakon, és értesülj elsőként az újdonságokról,
+            eseményekről és exkluzív ajánlatainkról. Légy részese a Lépcsős Rendezvényterem élménynek online is!
           </p>
           <div className="flex justify-center gap-8 text-xl flex-wrap">
             <a
@@ -320,7 +326,8 @@ function App() {
             <div className="w-full h-80 rounded-xl overflow-hidden shadow-lg border border-[#6B3A1E]/20 mb-12">
               <iframe
                 title="Lépcsős Rendezvényterem helyszín"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2692.123456789!2d18.945678!3d47.387654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476b0c123456789%3A0xabcdef123456789!2sÉrd%2C%20Római%20Út%204!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu"                 width="100%"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2692.123456789!2d18.945678!3d47.387654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476b0c123456789%3A0xabcdef123456789!2sÉrd%2C%20Római%20Út%204!5e0!3m2!1shu!2shu!4v1700000000000!5m2!1shu!2shu"
+                width="100%"
                 height="100%"
                 allowFullScreen=""
                 loading="lazy"
