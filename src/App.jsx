@@ -19,89 +19,83 @@ function App() {
   return (
     <div className="bg-[#F9F4E8] text-gray-900 font-sans">
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full bg-[#F9F4E8]/90 backdrop-blur-md shadow-md z-50">
-        <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 relative">
-          {/* LOGO */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <img
-              src="/logo.jpeg"
-              alt="Lépcsős Rendezvényterem logo"
-              className="h-16 md:h-20 w-auto"
-            />
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#6B3A1E] italic whitespace-nowrap">
-              <a href="#hero">
-                Lépcsős Rendezvényterem
-              </a>
-            </h1>
-          </div>
+      <div className="bg-[#F9F4E8] text-gray-900 font-sans overflow-x-hidden">
+  <header className="fixed top-0 left-0 w-full bg-[#F9F4E8]/90 backdrop-blur-md shadow-md z-50">
+    <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 relative">
+      {/* LOGO */}
+      <div className="flex items-center gap-3 flex-shrink-0">
+        <img
+          src="/logo.jpeg"
+          alt="Lépcsős Rendezvényterem logo"
+          className="h-16 md:h-20 w-auto"
+        />
+        <h1 className="text-2xl md:text-3xl font-semibold text-[#6B3A1E] italic whitespace-nowrap">
+          <a href="#hero">Lépcsős Rendezvényterem</a>
+        </h1>
+      </div>
 
-          {/* DESKTOP MENU */}
-          <div className="hidden md:flex space-x-8 font-medium">
-            <a href="#about" className="hover:text-[#6B3A1E] transition">
+      {/* DESKTOP MENU */}
+      <div className="hidden md:flex space-x-8 font-medium">
+        <a href="#about" className="hover:text-[#6B3A1E] transition">Rólunk</a>
+        <a href="#gallery" className="hover:text-[#6B3A1E] transition">Galéria</a>
+        <a href="#menu" className="hover:text-[#6B3A1E] transition">Árlista</a>
+        <a href="#contact" className="hover:text-[#6B3A1E] transition">Elérhetőség</a>
+      </div>
+
+      {/* MOBILE MENU ICON */}
+      <button
+        className="md:hidden text-[#6B3A1E] text-3xl"
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Mobil menü"
+      >
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* MOBILE MENU DROPDOWN */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="absolute top-full left-0 w-full bg-[#F9F4E8] shadow-lg border-t border-[#6B3A1E]/20 flex flex-col items-center py-4 md:hidden z-50"
+          >
+            <a
+              href="#about"
+              onClick={() => setMenuOpen(false)}
+              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
+            >
               Rólunk
             </a>
-            <a href="#gallery" className="hover:text-[#6B3A1E] transition">
+            <a
+              href="#gallery"
+              onClick={() => setMenuOpen(false)}
+              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
+            >
               Galéria
             </a>
-            <a href="#menu" className="hover:text-[#6B3A1E] transition">
+            <a
+              href="#menu"
+              onClick={() => setMenuOpen(false)}
+              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
+            >
               Árlista
             </a>
-            <a href="#contact" className="hover:text-[#6B3A1E] transition">
+            <a
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+              className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
+            >
               Elérhetőség
             </a>
-          </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  </header>
+</div>
 
-          {/* MOBILE MENU ICON */}
-          <button
-            className="md:hidden text-[#6B3A1E] text-3xl"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-
-          {/* MOBILE MENU DROPDOWN */}
-          <AnimatePresence>
-            {menuOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="absolute top-full left-0 w-full bg-[#F9F4E8] shadow-lg border-t border-[#6B3A1E]/20 flex flex-col items-center py-4 md:hidden z-40"
-              >
-                <a
-                  href="#about"
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-                >
-                  Rólunk
-                </a>
-                <a
-                  href="#gallery"
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-                >
-                  Galéria
-                </a>
-                <a
-                  href="#menu"
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-                >
-                  Árlista
-                </a>
-                <a
-                  href="#contact"
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-lg text-[#6B3A1E] hover:opacity-80"
-                >
-                  Elérhetőség
-                </a>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
-      </header>
 
       <main id="hero" className="pt-20 text-center text-gray-700">
         {/* HERO */}
