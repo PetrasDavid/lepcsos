@@ -155,13 +155,15 @@ function App() {
             Rólunk
           </motion.h2>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            A <strong>Lépcsős Rendezvényterem</strong> egy modern, elegáns helyszín,
-            ahol minden esemény fénybe borul. Legyen szó esküvőről, születésnapról,
-            konferenciáról vagy baráti összejövetelről, nálunk minden részlet a
-            tökéletességet szolgálja. <br />
+            A <strong>Lépcsős Rendezvényterem</strong> egy elegáns, modern kialakítású helyszín,
+            amely tökéletes választás kisebb-nagyobb eseményekhez. Legyen szó
+            családi ünnepről, születésnapról, céges összejövetelről vagy baráti
+            találkozóról, nálunk minden adott a felejthetetlen élményekhez.
             <br />
-            Modern fénytechnikával, hangulatos dekorációval és exkluzív
-            kiszolgálással várjuk vendégeinket.
+            <br />
+            A terem klimatizált, modern világítással és igényes belső térrel
+            rendelkezik. Rugalmas elrendezésének köszönhetően bármilyen eseményhez
+            igazítható.
             <br />
             Rendezvénytermünk a hét minden napján foglalható, rövidebb vagy hosszabb időtartamra is. 
             <br />
