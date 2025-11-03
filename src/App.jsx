@@ -47,7 +47,7 @@ function App() {
           {/* LOGO + TITLE */}
           <div className="flex items-center gap-3 flex-shrink-0">
             <img
-              src="/logo.jpeg"
+              src="/logo2.png"
               alt="Lépcsős Rendezvényterem logo"
               className="h-20 w-auto rounded-xl"
             />
@@ -165,14 +165,14 @@ function App() {
             rendelkezik. Rugalmas elrendezésének köszönhetően bármilyen eseményhez
             igazítható.
             <br />
-            Rendezvénytermünk a hét minden napján foglalható, rövidebb vagy hosszabb időtartamra is. 
+            Rendezvénytermünk a hét minden napján foglalható, rövidebb vagy hosszabb időtartamra is.
             <br />
             <strong>A terem maximális befogadóképessége 40 fő.</strong>
             <br />
             <br />
-            Étel, ital rendelhető vagy bevihető. 
-            Az étkezéshez szükséges poharak, tányérok és evőeszközök bérlése kedvező áron elérhető. 
-            Amennyiben szeretnék segítségünket kérni a rendezvény szervezésében, lebonyolításában szívesen állunk rendelkezésre. 
+            Étel, ital rendelhető vagy bevihető.
+            Az étkezéshez szükséges poharak, tányérok és evőeszközök bérlése kedvező áron elérhető.
+            Amennyiben szeretnék segítségünket kérni a rendezvény szervezésében, lebonyolításában szívesen állunk rendelkezésre.
             Nem zárkózunk el az egyedi kívánságoktól.
           </p>
         </section>
@@ -218,7 +218,7 @@ function App() {
             </div>
           </div>
         </section>
-        
+
         {/* GALLERY */}
         <section id="gallery" className="bg-[#F8F9FB] py-20">
           <div className="max-w-6xl mx-auto px-6 text-center">
@@ -232,33 +232,21 @@ function App() {
             </motion.h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {[
-                "https://images.unsplash.com/photo-1600607687920-4e2a09cf1590?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1508923567004-3a6b8004f3d3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1524492449090-1a187f89b3f3?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1521790364420-4075a7b0f96f?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1533777324565-a040eb52f272?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80",
-              ].map((src, i) => (
+              {[...Array(6)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="overflow-hidden rounded-2xl shadow-lg cursor-pointer border border-[#E5B80B]/20"
-                  whileHover={{ scale: 1.05, boxShadow: "0 15px 30px rgba(0,0,0,0.2)" }}
+                  className="relative overflow-hidden rounded-2xl shadow-lg border border-[#E5B80B]/20"
+                  whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <img
-                    src={src}
-                    alt={`Galéria kép ${i + 1}`}
-                    className="w-full aspect-[4/3] object-cover"
-                    onError={(e) => { e.currentTarget.src = "/logo.jpeg"; }}
-                  />
+                  <div className="bg-gray-200 w-full aspect-[4/3] flex items-center justify-center">
+                    <span className="text-gray-500 text-xl italic">Hamarosan</span>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
-
-
 
         {/* ÁRLISTA */}
         <section id="menu" className="bg-white py-20">
@@ -275,19 +263,19 @@ function App() {
             <div className="grid md:grid-cols-2 gap-6 mb-10">
               {[
                 {
-                  title: "Hétköznap 8–18 óráig",
-                  price: "8 000 Ft / óra",
+                  title: "Napközben 8–17 óráig",
+                  price: "3 óra 30 000 Ft, minden további óra 6 000 Ft",
                 },
                 {
                   title: "Hétfőtől csütörtökig 18–22 óráig",
-                  price: "9 000 Ft / óra",
+                  price: "38 000 Ft",
                 },
                 {
-                  title: "Szombat, vasárnap 8–18 óráig",
-                  price: "9 000 Ft / óra",
+                  title: "Péntek, szombat, vasárnap 18–22 óráig",
+                  price: "45 000 Ft",
                 },
                 {
-                  title: "Péntek–vasárnap 18–22 óráig",
+                  title: "22 óra utáni tartózkodás esetén",
                   price: "10 000 Ft / óra",
                 },
               ].map((item, i) => (
@@ -307,15 +295,13 @@ function App() {
             </div>
 
             <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-              Minimum bérlési idő <strong>3 óra</strong>. <br />
-              Hat óránál hosszabb bérleti időre, illetve éjszakai rendezvényre{" "}
-              <strong>egyedi árajánlatot</strong> készítünk. <br />
+              Az árak tájékoztató jellegűek. Fentiekből eltérő időtartamra kérjen{" "}
+              <strong>egyedi árajánlatot</strong>.
               <br />
-              Lehetőség van partnereinken keresztül{" "}
-              <strong>étel, ital, dekoráció</strong> megrendelésére, valamint{" "}
-              <strong>személyzet</strong> (felszolgáló, biztonsági őr)
-              igénybevételére is. Az igények ismeretében személyre szabott
-              ajánlatot adunk.
+              <br />
+              Lehetőség van <strong>étel, ital, dekoráció</strong> megrendelésére, valamint{" "}
+              <strong>személyzet</strong> (felszolgáló, biztonsági őr) igénybevételére is.
+              Az igények ismeretében személyre szabott ajánlatot készítünk.
             </p>
           </div>
         </section>
@@ -372,7 +358,7 @@ function App() {
                 Római út 4.
               </p>
             </div>
-            
+
             {/* MAP */}
             <div className="w-full h-80 rounded-xl overflow-hidden shadow-lg border border-[#6B3A1E]/20 mb-12">
               <iframe
@@ -388,9 +374,67 @@ function App() {
           </div>
         </section>
 
+        {/* FOOTER INFO SECTION */}
+        <section className="bg-[#2C2C2C] text-white py-12">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6 text-left">
+
+            {/* LOGO + SOCIAL */}
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <img
+                  src="/logo.jpeg"
+                  alt="Lépcsős Rendezvényterem logó"
+                  className="h-14 w-auto rounded-lg"
+                />
+                <h3 className="text-xl font-bold italic text-[#E5B80B]">
+                  Lépcsős Rendezvényterem
+                </h3>
+              </div>
+              <div className="flex items-center gap-4 mt-4">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#E5B80B] transition"
+                >
+                  <FaFacebook size={22} />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#E5B80B] transition"
+                >
+                  <FaInstagram size={22} />
+                </a>
+              </div>
+            </div>
+
+            {/* ELÉRHETŐSÉG */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4 text-[#E5B80B]">Elérhetőség</h4>
+              <p>Cím: 2030 Érd, Római út 4.</p>
+              <p>Telefon: +36 30 625 4490</p>
+              <p>E-mail: lepcsos@hodszerviz.hu</p>
+            </div>
+
+            {/* MENÜ */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4 text-[#E5B80B]">Menü</h4>
+              <ul className="space-y-2">
+                <li><a href="#hero" className="hover:text-[#E5B80B]">Kezdőlap</a></li>
+                <li><a href="#about" className="hover:text-[#E5B80B]">Rólunk</a></li>
+                <li><a href="#gallery" className="hover:text-[#E5B80B]">Galéria</a></li>
+                <li><a href="#menu" className="hover:text-[#E5B80B]">Árak, szolgáltatások</a></li>
+                <li><a href="#contact" className="hover:text-[#E5B80B]">Elérhetőség</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
         {/* FOOTER */}
         <footer className="bg-[#2C2C2C] text-white text-center py-6">
-          <p>© 2025 Lépcsős Rendezvényterem – Minden jog fenntartva</p>
+          <p>© 2025 Lépcsős Rendezvényterem - Minden jog fenntartva</p>
         </footer>
       </main>
     </div>
