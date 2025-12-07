@@ -16,6 +16,21 @@ import "./App.css";
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  // LIGHTBOX ÁLLAPOTOK
+  const [selectedImage, setSelectedImage] = useState(null); // A kiválasztott kép útvonala
+  const [isModalOpen, setIsModalOpen] = useState(false); // A Modális ablak állapota
+
+  // LIGHTBOX FÜGGVÉNYEK
+  const openModal = (filename) => {
+    setSelectedImage(`/${filename}`); // A public mappához viszonyított útvonal beállítása
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -38,6 +53,18 @@ function App() {
       });
     });
   }, []);
+  
+  // ESC billentyűvel való bezárás
+  useEffect(() => {
+    const handleKeydown = (e) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        closeModal();
+      }
+    };
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
+  }, [isModalOpen]);
+
 
   return (
     <div className="bg-white text-[#2C2C2C] font-sans overflow-x-hidden">
@@ -116,7 +143,7 @@ function App() {
           className="h-screen flex flex-col justify-center items-center bg-cover bg-center text-white relative"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1616628188599-8c67f9c2bb16?auto=format&fit=crop&w=1920&q=80')",
+              "url('/IMG_1183.JPG')",
           }}
         >
           <div className="absolute inset-0 bg-black/40"></div>
@@ -171,7 +198,7 @@ function App() {
             <br />
             <br />
             Étel, ital rendelhető vagy bevihető.
-            Az étkezéshez szükséges poharak, tányérok és evőeszközök bérlése kedvező áron elérhető.
+            Az étkezéshez szükséges poharak, tányérok és evőeszközök bérlése rendelkezésre állnak.
             Amennyiben szeretnék segítségünket kérni a rendezvény szervezésében, lebonyolításában szívesen állunk rendelkezésre.
             Nem zárkózunk el az egyedi kívánságoktól.
           </p>
@@ -188,7 +215,7 @@ function App() {
                 {
                   icon: <FaStar className="text-4xl text-[#E5B80B]" />,
                   title: "Modern felszereltség",
-                  text: "Korszerű hang- és fénytechnika, kényelmes bútorzat, elegáns környezet.",
+                  text: "Korszerű hang-, kényelmes bútorzat, elegáns környezet.",
                 },
                 {
                   icon: <FaMapMarkerAlt className="text-4xl text-[#E5B80B]" />,
@@ -232,21 +259,77 @@ function App() {
             </motion.h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
+              {[
+                "IMG_1183.JPG",
+                "IMG_1185.JPG",
+                "IMG_1186.JPG",
+                "IMG_1235.jpeg",
+                "IMG_1237.jpeg",
+                "IMG_1238.jpeg",
+              ].map((filename, i) => (
                 <motion.div
                   key={i}
-                  className="relative overflow-hidden rounded-2xl shadow-lg border border-[#E5B80B]/20"
+                  className="relative overflow-hidden rounded-2xl shadow-lg border border-[#E5B80B]/20 cursor-pointer" // Hozzáadtuk a cursor-pointer-t
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.3 }}
+                  onClick={() => openModal(filename)} // Hozzáadtuk az onClick eseményt!
                 >
-                  <div className="bg-gray-200 w-full aspect-[4/3] flex items-center justify-center">
-                    <span className="text-gray-500 text-xl italic">Hamarosan</span>
-                  </div>
+                  <img
+                    // Itt használjuk a / útvonalat, ami a public mappára mutat
+                    src={`/${filename}`}
+                    alt={`Galéria kép ${i + 1}`}
+                    className="w-full h-full object-cover aspect-[4/3]"
+                  />
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
+        
+        {/* LIGHTBOX / MODAL WINDOW - TOVÁBBI RESZPONZIVITÁSI JAVÍTÁSOK */}
+        <AnimatePresence>
+          {isModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              // A teljes képernyős háttérkonténer
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 backdrop-blur-sm p-4"
+              onClick={closeModal} // Bezárás, ha a sötét területre kattintunk
+            >
+              <motion.div
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                // Ez a konténer max. 95%-át veszi fel a nézet magasságának
+                className="relative max-w-5xl max-h-[95vh] h-full w-full flex justify-center items-center" 
+                onClick={(e) => e.stopPropagation()} 
+              >
+                {/* Kép */}
+                <img
+                  src={selectedImage}
+                  alt="Nagyított kép"
+                  // A KÉP MÉRETEZÉSÉNEK JAVÍTÁSA: 
+                  // Mindig kitölti a rendelkezésre álló konténert (h-full w-full)
+                  // de megtartja az arányait és nem vágja le (object-contain)
+                  className="max-w-full max-h-full h-full w-full object-contain mx-auto shadow-2xl rounded-lg"
+                />
+                
+                {/* Bezárás gomb */}
+                <button
+                  className="absolute top-4 right-4 text-white text-4xl font-light p-2 transition duration-300 hover:scale-110"
+                  onClick={closeModal}
+                  aria-label="Close modal"
+                >
+                  <FaTimes />
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
 
         {/* ÁRLISTA */}
         <section id="menu" className="bg-white py-20">
@@ -271,8 +354,8 @@ function App() {
                   price: "38 000 Ft",
                 },
                 {
-                  title: "Péntek, szombat, vasárnap 18–22 óráig",
-                  price: "45 000 Ft",
+                  title: "Péntek, szombat, vasárnap",
+                  price: "10 000 Ft / óra",
                 },
                 {
                   title: "22 óra utáni tartózkodás esetén",
@@ -322,7 +405,7 @@ function App() {
           </p>
           <div className="flex justify-center gap-8 text-xl flex-wrap">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/profile.php?id=61582500260042"
               target="_blank"
               className="flex items-center gap-3 bg-white text-[#2C2C2C] px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
             >
@@ -330,7 +413,7 @@ function App() {
               <span className="font-semibold">Facebook</span>
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/lepcsos_rendezvenyterem/"
               target="_blank"
               className="flex items-center gap-3 bg-white text-[#2C2C2C] px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
             >
@@ -392,7 +475,7 @@ function App() {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61582500260042"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-[#E5B80B] transition"
@@ -400,7 +483,7 @@ function App() {
                   <FaFacebook size={22} />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/lepcsos_rendezvenyterem/"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-[#E5B80B] transition"
@@ -441,4 +524,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
